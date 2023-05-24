@@ -17,16 +17,16 @@ Order | Image(s) | Description
 2nd | `gnuradio310` | [VOLK](https://github.com/gnuradio/volk), [GNU Radio](https://github.com/gnuradio/gnuradio) 3.10, and several OOT modules
 3rd | `xxx` | project-specific images (in other repositories)
 
-The base image (`sdrs`) will also set up a non-root user with `sudo` access whose name is derived from the host user - this is all handled automatically through the build scripts. Be sure to run the `udev.sh` script to install udev rules on the host (which will allow non-sudo access of SDR hardware inside the container).
+The base image (`sdrs`) will also set up a non-root user with `sudo` access whose name is derived from the host user - this is all handled automatically through the build scripts. Be sure to run the `udev.sh` script to install `udev` rules on the host. This will allow non-root access of Signal Hound and Ettus SDR hardware inside the container.
 
 ## Running
 
-Allow docker containers to connect to the host X11 server. It's best to just add this to the host `~/.bashrc` file.
+Allow docker containers to connect to the host X11 server. It's best to just add this line to the host `~/.bashrc` file.
 ```
 xhost +local:docker
 ```
 
-The [gnuradio310/)](gnuradio310/) directory contains example run scripts that show how to start a container based on these images. Once inside the container, open GNU Radio Companion:
+The [gnuradio310/](gnuradio310/) directory contains a `run.sh` script that shows how to start a container. By default, it maps the host's `~/Downloads` directory as a container volume. Once inside the container, open GNU Radio Companion:
 
 ```bash
 dev@2b310945025e:~$ gnuradio-companion
