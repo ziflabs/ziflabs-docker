@@ -18,34 +18,28 @@ RUN apt-get update && \
     pybind11-dev python3-matplotlib libsndfile1-dev python3-pip libsoapysdr-dev soapysdr-tools libiio-dev libad9361-dev libspdlog-dev \
     python3-packaging python3-jsonschema castxml clang-format \
     # gr-sigmf dependencies
-    rapidjson-dev \
-    # gr-fosphor dependencies
-    cmake xorg-dev libglu1-mesa-dev nvidia-driver-530 nvidia-opencl-dev opencl-headers clinfo nvidia-modprobe
+    rapidjson-dev
 
 RUN sudo -H pip install -U pip pygccxml pyqtgraph
-
 
 ########
 # VOLK #
 ########
 
-WORKDIR /home/$USER/foss
-
 RUN \
+    cd /home/$USER/foss && \
     git clone https://github.com/gnuradio/volk && cd volk && git checkout v3.0.0 && git submodule update --init && \
     mkdir /home/$USER/foss/volk/build && \
     cd /home/$USER/foss/volk/build && \
-    cmake .. && make -j$(nproc) && sudo make install && sudo ldconfig
-
-RUN volk_profile
+    cmake .. && make -j$(nproc) && sudo make install && sudo ldconfig && \
+    volk_profile
 
 ###############
 #  GNU Radio  #
-###############
-
-WORKDIR /home/$USER/foss
+############### 
 
 RUN \
+    cd /home/$USER/foss && \
     git clone https://github.com/gnuradio/gnuradio && cd gnuradio && git checkout v3.10.6.0 && \
     mkdir /home/$USER/foss/gnuradio/build && \
     cd /home/$USER/foss/gnuradio/build && \
@@ -56,11 +50,10 @@ RUN \
 
 ###############
 #  gr-shbb60  #
-###############
-
-WORKDIR /home/$USER/foss
+############### 
 
 RUN \
+    cd /home/$USER/foss && \
     git clone https://github.com/herrameise/gr-shbb60 && \
     mkdir /home/$USER/foss/gr-shbb60/build && \
     cd /home/$USER/foss/gr-shbb60/build && \
@@ -70,9 +63,8 @@ RUN \
 #  gr-sigmf  #
 ##############
 
-WORKDIR /home/$USER/foss
-
 RUN \
+    cd /home/$USER/foss && \
     git clone https://github.com/skysafe/gr-sigmf && \
     mkdir /home/$USER/foss/gr-sigmf/build && \
     cd /home/$USER/foss/gr-sigmf/build && \
@@ -82,10 +74,8 @@ RUN \
 #  gr-pdu_utils  #
 ##################
 
-WORKDIR /home/$USER/foss
-
-
 RUN \
+    cd /home/$USER/foss && \
     # git clone https://github.com/sandialabs/gr-pdu_utils
     # until Sandia Labs accepts the pull request
     git clone https://github.com/gunawanw9/gr-pdu_utils && \
@@ -95,11 +85,10 @@ RUN \
 
 #####################
 #  gr-sandia_utils  #
-#####################
-
-WORKDIR /home/$USER/foss
+##################### 
 
 RUN \
+    cd /home/$USER/foss && \
     git clone https://github.com/sandialabs/gr-sandia_utils && \
     mkdir gr-sandia_utils/build && \
     cd /home/$USER/foss/gr-sandia_utils/build && \
@@ -107,11 +96,10 @@ RUN \
 
 #####################
 #  gr-timing_utils  #
-#####################
-
-WORKDIR /home/$USER/foss
+##################### 
 
 RUN \
+    cd /home/$USER/foss && \
     git clone https://github.com/sandialabs/gr-timing_utils && \
     mkdir gr-timing_utils/build && \
     cd /home/$USER/foss/gr-timing_utils/build && \
@@ -119,46 +107,14 @@ RUN \
 
 ###################
 #  gr-fhss_utils  #
-###################
-
-WORKDIR /home/$USER/foss
+################### 
 
 RUN \
+    cd /home/$USER/foss && \
     git clone https://github.com/sandialabs/gr-fhss_utils && \
     mkdir gr-fhss_utils/build && \
     cd /home/$USER/foss/gr-fhss_utils/build && \
     cmake .. && make -j$(nproc) && sudo make install && sudo ldconfig
-
-################
-#  gr-fosphor  #
-################
-
-WORKDIR /home/$USER/foss
-
-RUN \
-    git clone https://github.com/glfw/glfw && \
-    cd /home/$USER/foss/glfw && \
-    mkdir build && cd build && cmake ../ -DBUILD_SHARED_LIBS=true && make -j$(nproc) && sudo make install && sudo ldconfig
-
-WORKDIR /home/$USER/foss
-RUN \
-    git clone https://gitea.osmocom.org/sdr/gr-fosphor.git && \
-    cd /home/$USER/foss/gr-fosphor && \
-    mkdir build && cd build && cmake ../ -DBUILD_SHARED_LIBS=true && make -j$(nproc) && sudo make install && sudo ldconfig
-
-# this has to be run as root for some reason ...
-USER root
-RUN mkdir -p /etc/OpenCL/vendors && echo "libnvidia-opencl.so.1" > /etc/OpenCL/vendors/nvidia.icd
-USER $USER
-
-################
-#  FLOWGRAPHS  #
-################
-
-RUN mkdir -p /home/$USER/flowgraphs
-COPY flowgraphs/test_b200.grc /home/$USER/flowgraphs/test_b200.grc
-COPY flowgraphs/test_fosphor.grc /home/$USER/flowgraphs/test_fosphor.grc
-COPY flowgraphs/test_signalhound.grc /home/$USER/flowgraphs/test_signalhound.grc
 
 ##########
 #  DONE  #
