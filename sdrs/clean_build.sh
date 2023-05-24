@@ -4,6 +4,7 @@ docker image prune -f
 
 docker build \
     -t sdrs \
+    --no-cache \
     --build-arg USER=$USER \
     --build-arg UID=$(id -u) \
     --build-arg GID=$(id -g) \
