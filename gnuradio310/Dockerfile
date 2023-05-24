@@ -76,11 +76,9 @@ RUN \
 
 RUN \
     cd /home/$USER/foss && \
-    # git clone https://github.com/sandialabs/gr-pdu_utils
-    # until Sandia Labs accepts the pull request
-    git clone https://github.com/gunawanw9/gr-pdu_utils && \
-    mkdir gr-pdu_utils/build && \
-    cd /home/$USER/foss/gr-pdu_utils/build && \
+    git clone https://github.com/sandialabs/gr-pdu_utils && \
+    cd /home/$USER/foss/gr-pdu_utils && git checkout maint-3.10 && \
+    mkdir build && cd build && \
     cmake .. && make -j$(nproc) && sudo make install && sudo ldconfig
 
 #####################
@@ -90,8 +88,8 @@ RUN \
 RUN \
     cd /home/$USER/foss && \
     git clone https://github.com/sandialabs/gr-sandia_utils && \
-    mkdir gr-sandia_utils/build && \
-    cd /home/$USER/foss/gr-sandia_utils/build && \
+    cd /home/$USER/foss/gr-sandia_utils && git checkout maint-3.10 && \
+    mkdir build && cd build && \
     cmake .. && make -j$(nproc) && sudo make install && sudo ldconfig
 
 #####################
@@ -101,8 +99,8 @@ RUN \
 RUN \
     cd /home/$USER/foss && \
     git clone https://github.com/sandialabs/gr-timing_utils && \
-    mkdir gr-timing_utils/build && \
-    cd /home/$USER/foss/gr-timing_utils/build && \
+    cd /home/$USER/foss/gr-timing_utils && git checkout maint-3.10 && \
+    mkdir build && cd build && \
     cmake .. && make -j$(nproc) && sudo make install && sudo ldconfig
 
 ###################
@@ -112,8 +110,8 @@ RUN \
 RUN \
     cd /home/$USER/foss && \
     git clone https://github.com/sandialabs/gr-fhss_utils && \
-    mkdir gr-fhss_utils/build && \
-    cd /home/$USER/foss/gr-fhss_utils/build && \
+    cd /home/$USER/foss/gr-fhss_utils && git checkout maint-3.10 && \
+    mkdir build && cd build && \
     cmake .. && make -j$(nproc) && sudo make install && sudo ldconfig
 
 ##########

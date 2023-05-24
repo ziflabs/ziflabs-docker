@@ -11,7 +11,7 @@ RUN apt-get update && \
     apt-get upgrade -y && \
     apt-get install -y \
     # user packages
-    sudo gnupg2 curl ca-certificates \
+    sudo \
     # UHD dependencies
     autoconf automake build-essential ccache cmake cpufrequtils doxygen ethtool g++ git inetutils-tools \
     libboost-all-dev libncurses5 libncurses5-dev libusb-1.0-0 libusb-1.0-0-dev libusb-dev python3-dev \
@@ -27,10 +27,6 @@ RUN \
     useradd -rm -d /home/$USER -s /bin/bash -g 100 -G sudo -u $UID $USER && \
     groupadd -g $GID $USER && \
     echo "$USER ALL=(ALL:ALL) NOPASSWD: ALL" | sudo tee "/etc/sudoers.d/dont-prompt-$USER-for-sudo-password"
-
-# fix for hanging tzdata package configuration
-RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime
-RUN echo $TZ > /etc/timezone && exit
 
 #################################
 #  MAKE DIRECTORY FOR SOFTWARE  #
