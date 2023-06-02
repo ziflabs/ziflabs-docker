@@ -12,6 +12,8 @@ RUN apt-get update && \
     apt-get install -y \
     # user packages
     sudo \
+    # SDRplay dependencies
+    git build-essential cmake libsoapysdr-dev soapysdr-tools usbutils udev \
     # UHD dependencies
     autoconf automake build-essential ccache cmake cpufrequtils doxygen ethtool g++ git inetutils-tools \
     libboost-all-dev libncurses5 libncurses5-dev libusb-1.0-0 libusb-1.0-0-dev libusb-dev python3-dev \
@@ -34,6 +36,22 @@ RUN \
 
 USER $USER
 RUN mkdir -p /home/$USER/foss
+
+####################
+#  SDRplay RSPxxx  #
+####################
+
+WORKDIR /home/$USER/foss
+
+RUN \
+    cd /home/$USER/foss && \
+    git clone https://github.com/ziflabs/sdrplay-api-linux-docker && \
+    cd /home/$USER/foss/sdrplay-api-linux-docker && ./install_lib_DOCKER.sh && \
+    cd /home/$USER/foss && \
+    git clone https://github.com/pothosware/SoapySDRPlay.git && \
+    mkdir /home/$USER/foss/SoapySDRPlay/build && \
+    cd /home/$USER/foss/SoapySDRPlay/build && \
+    cmake .. && make -j$(nproc) && sudo make install && sudo ldconfig
 
 #########
 #  UHD  #
