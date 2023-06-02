@@ -1,12 +1,12 @@
 options:
   parameters:
-    author: ''
+    author: HerrAmeise
     catch_exceptions: 'True'
     category: Custom
     cmake_opt: ''
     comment: ''
-    copyright: ''
-    description: ''
+    copyright: Zero-IF Labs, LLC
+    description: simple spectrum analyzer for USRP B2XX
     gen_cmake: 'On'
     gen_linking: dynamic
     generate_options: qt_gui
@@ -33,41 +33,60 @@ options:
     state: enabled
 
 blocks:
-- name: default_station
-  id: variable
+- name: freq
+  id: variable_qtgui_range
   parameters:
-    comment: Rumba 106.1 Philadelphia
-    value: '106.1'
+    comment: ''
+    gui_hint: 0,0,1,2
+    label: Frequency
+    min_len: '200'
+    orient: QtCore.Qt.Horizontal
+    rangeType: float
+    start: freq_low + (samp_rate/2)
+    step: 5e6
+    stop: freq_high - (samp_rate/2)
+    value: 2.45e9
+    widget: counter_slider
   states:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [16, 708.0]
+    coordinate: [8, 148.0]
     rotation: 0
-    state: enabled
-- name: freq
+    state: true
+- name: freq_high
   id: variable
   parameters:
     comment: ''
-    value: station*1000000
+    value: 6e9
   states:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [144, 556.0]
+    coordinate: [168, 212.0]
+    rotation: 0
+    state: true
+- name: freq_low
+  id: variable
+  parameters:
+    comment: ''
+    value: 70e6
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [168, 148.0]
     rotation: 0
     state: true
 - name: gain
   id: variable_qtgui_range
   parameters:
     comment: ''
-    gui_hint: ''
+    gui_hint: 1,0,1,2
     label: Gain
     min_len: '200'
     orient: QtCore.Qt.Horizontal
-    outputmsgname: value
     rangeType: float
-    showports: 'False'
     start: '0'
     step: '1'
     stop: '100'
@@ -77,7 +96,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [16, 308.0]
+    coordinate: [8, 308.0]
     rotation: 0
     state: enabled
 - name: gui_update
@@ -89,45 +108,9 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [936, 12.0]
+    coordinate: [944, 204.0]
     rotation: 0
     state: enabled
-- name: samp_rate
-  id: variable
-  parameters:
-    comment: ''
-    value: 2e6
-  states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [256, 12.0]
-    rotation: 0
-    state: enabled
-- name: samp_rate
-  id: variable
-  parameters:
-    comment: ''
-    value: 5e6
-  states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [352, 12.0]
-    rotation: 0
-    state: disabled
-- name: samp_rate
-  id: variable
-  parameters:
-    comment: ''
-    value: 10e6
-  states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [448, 12.0]
-    rotation: 0
-    state: disabled
 - name: samp_rate
   id: variable
   parameters:
@@ -137,51 +120,9 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [544, 12.0]
+    coordinate: [208, 12.0]
     rotation: 0
-    state: disabled
-- name: station
-  id: variable_qtgui_range
-  parameters:
-    comment: ''
-    gui_hint: ''
-    label: Station
-    min_len: '200'
-    orient: QtCore.Qt.Horizontal
-    outputmsgname: value
-    rangeType: float
-    showports: 'False'
-    start: '88.5'
-    step: '0.2'
-    stop: '107.9'
-    value: default_station
-    widget: counter_slider
-  states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [16, 524.0]
-    rotation: 0
-    state: true
-- name: fosphor_qt_sink_c_0
-  id: fosphor_qt_sink_c
-  parameters:
-    affinity: ''
-    alias: ''
-    comment: ''
-    freq_center: freq
-    freq_span: samp_rate
-    gui_hint: 1,0,1,4
-    maxoutbuf: '0'
-    minoutbuf: '0'
-    wintype: window.WIN_BLACKMAN_hARRIS
-  states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [944, 340.0]
-    rotation: 0
-    state: disabled
+    state: enabled
 - name: qtgui_freq_sink_x_0
   id: qtgui_freq_sink_x
   parameters:
@@ -217,7 +158,7 @@ blocks:
     fftsize: '8192'
     freqhalf: 'True'
     grid: 'False'
-    gui_hint: 1,0,1,4
+    gui_hint: 2,0,1,1
     label: Relative Gain
     label1: ''
     label10: ''''''
@@ -232,7 +173,7 @@ blocks:
     legend: 'True'
     maxoutbuf: '0'
     minoutbuf: '0'
-    name: '"RF Spectrum"'
+    name: '"Spectrum"'
     nconnections: '1'
     norm_window: 'False'
     showports: 'False'
@@ -260,7 +201,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [944, 132.0]
+    coordinate: [944, 284.0]
     rotation: 0
     state: enabled
 - name: qtgui_waterfall_sink_x_0
@@ -295,7 +236,7 @@ blocks:
     fftsize: '8192'
     freqhalf: 'True'
     grid: 'False'
-    gui_hint: 1,0,1,4
+    gui_hint: 2,1,1,1
     int_max: '10'
     int_min: '-140'
     label1: ''
@@ -311,7 +252,7 @@ blocks:
     legend: 'True'
     maxoutbuf: '0'
     minoutbuf: '0'
-    name: '"RF Spectrum"'
+    name: '"Waterfall"'
     nconnections: '1'
     showports: 'False'
     type: complex
@@ -321,9 +262,9 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [944, 236.0]
+    coordinate: [944, 388.0]
     rotation: 0
-    state: disabled
+    state: enabled
 - name: uhd_usrp_source_0
   id: uhd_usrp_source
   parameters:
@@ -757,15 +698,14 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [232, 308.0]
+    coordinate: [400, 324.0]
     rotation: 0
     state: enabled
 
 connections:
-- [uhd_usrp_source_0, '0', fosphor_qt_sink_c_0, '0']
 - [uhd_usrp_source_0, '0', qtgui_freq_sink_x_0, '0']
 - [uhd_usrp_source_0, '0', qtgui_waterfall_sink_x_0, '0']
 
 metadata:
   file_format: 1
-  grc_version: 3.10.4.0
+  grc_version: 3.10.6.0

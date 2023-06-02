@@ -34,4 +34,8 @@ dev@bf8e4cedc564:~$ gnuradio-companion
 
 And the GUI should come up:
 
-![GNU Radio Companion running inside Docker container](screenshot.png)
+![GNU Radio Companion running inside Docker container](images/gnuradio_docker.png)
+
+There are also flowgraphs in `gnuradio310/flowgraphs/` that can be `docker cp`-ed into the container.
+
+![a GNU Radio flowgraph running inside Docker container](images/gnuradio_docker_flowgraph.png)

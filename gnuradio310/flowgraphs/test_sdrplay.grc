@@ -1,0 +1,355 @@
+options:
+  parameters:
+    author: HerrAmeise
+    catch_exceptions: 'True'
+    category: '[GRC Hier Blocks]'
+    cmake_opt: ''
+    comment: ''
+    copyright: Zero-IF Labs, LLC
+    description: simple spectrum analyzer for SDRplay RSPxxx
+    gen_cmake: 'On'
+    gen_linking: dynamic
+    generate_options: qt_gui
+    hier_block_src_path: '.:'
+    id: test_sdrplay
+    max_nouts: '0'
+    output_language: python
+    placement: (0,0)
+    qt_qss_theme: ''
+    realtime_scheduling: ''
+    run: 'True'
+    run_command: '{python} -u {filename}'
+    run_options: prompt
+    sizing_mode: fixed
+    thread_safe_setters: ''
+    title: 'Test: SDRplay RSPxxx'
+    window_size: (1000,1000)
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [16, 12.0]
+    rotation: 0
+    state: enabled
+
+blocks:
+- name: antenna
+  id: variable_qtgui_chooser
+  parameters:
+    comment: ''
+    gui_hint: 3,0,1,2
+    label: Antenna
+    label0: '"Tuner 1 50 ohm"'
+    label1: '"Tuner 1 Hi-Z"'
+    label2: '"Tuner 2 50 ohm"'
+    label3: ''
+    label4: ''
+    labels: '["62500", "96000", "125000", "192000", "250000", "384000", "500000",
+      "768000", "1000000", "2000000", "2048000", "3000000", "4000000", "5000000",
+      "6000000", "7000000", "8000000", "9000000", "10000000"]'
+    num_opts: '3'
+    option0: '"Tuner 1 50 ohm"'
+    option1: '"Tuner 1 Hi-Z"'
+    option2: '"Tuner 2 50 ohm"'
+    option3: '3'
+    option4: '4'
+    options: '[62500, 96000, 125000, 192000, 250000, 384000, 500000, 768000, 1000000,
+      2000000, 2048000, 3000000, 4000000, 5000000, 6000000, 7000000, 8000000, 9000000,
+      10000000]'
+    orient: Qt.QVBoxLayout
+    type: string
+    value: '"Tuner 1 50 ohm"'
+    widget: combo_box
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [384, 12.0]
+    rotation: 0
+    state: true
+- name: freq
+  id: variable_qtgui_range
+  parameters:
+    comment: ''
+    gui_hint: 0,0,1,2
+    label: Frequency
+    min_len: '200'
+    orient: QtCore.Qt.Horizontal
+    rangeType: float
+    start: freq_low + (samp_rate/2)
+    step: samp_rate/4
+    stop: freq_high - (samp_rate/2)
+    value: 1090e6
+    widget: counter_slider
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [16, 212.0]
+    rotation: 0
+    state: true
+- name: freq_high
+  id: variable
+  parameters:
+    comment: ''
+    value: 2e9
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [160, 276.0]
+    rotation: 0
+    state: true
+- name: freq_low
+  id: variable
+  parameters:
+    comment: ''
+    value: 1e3
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [160, 212.0]
+    rotation: 0
+    state: true
+- name: gain
+  id: variable_qtgui_range
+  parameters:
+    comment: ''
+    gui_hint: 1,0,1,2
+    label: Gain
+    min_len: '200'
+    orient: QtCore.Qt.Horizontal
+    rangeType: float
+    start: '-47'
+    step: '0.5'
+    stop: '0'
+    value: '-20'
+    widget: counter_slider
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [16, 348.0]
+    rotation: 0
+    state: true
+- name: gui_update
+  id: variable
+  parameters:
+    comment: ''
+    value: '0.01'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [680, 260.0]
+    rotation: 0
+    state: enabled
+- name: samp_rate
+  id: variable_qtgui_chooser
+  parameters:
+    comment: ''
+    gui_hint: 2,0,1,2
+    label: Sample Rate
+    label0: ''
+    label1: ''
+    label2: ''
+    label3: ''
+    label4: ''
+    labels: '["62500", "96000", "125000", "192000", "250000", "384000", "500000",
+      "768000", "1000000", "2000000", "2048000", "3000000", "4000000", "5000000",
+      "6000000", "7000000", "8000000", "9000000", "10000000"]'
+    num_opts: '0'
+    option0: '0'
+    option1: '1'
+    option2: '2'
+    option3: '3'
+    option4: '4'
+    options: '[62500, 96000, 125000, 192000, 250000, 384000, 500000, 768000, 1000000,
+      2000000, 2048000, 3000000, 4000000, 5000000, 6000000, 7000000, 8000000, 9000000,
+      10000000]'
+    orient: Qt.QVBoxLayout
+    type: real
+    value: '2048000'
+    widget: combo_box
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [200, 12.0]
+    rotation: 0
+    state: true
+- name: qtgui_freq_sink_x_0
+  id: qtgui_freq_sink_x
+  parameters:
+    affinity: ''
+    alias: ''
+    alpha1: '1.0'
+    alpha10: '1.0'
+    alpha2: '1.0'
+    alpha3: '1.0'
+    alpha4: '1.0'
+    alpha5: '1.0'
+    alpha6: '1.0'
+    alpha7: '1.0'
+    alpha8: '1.0'
+    alpha9: '1.0'
+    autoscale: 'False'
+    average: '1.0'
+    axislabels: 'True'
+    bw: samp_rate
+    color1: '"blue"'
+    color10: '"dark blue"'
+    color2: '"red"'
+    color3: '"green"'
+    color4: '"black"'
+    color5: '"cyan"'
+    color6: '"magenta"'
+    color7: '"yellow"'
+    color8: '"dark red"'
+    color9: '"dark green"'
+    comment: ''
+    ctrlpanel: 'True'
+    fc: freq
+    fftsize: '8192'
+    freqhalf: 'True'
+    grid: 'False'
+    gui_hint: 4,0,1,1
+    label: Relative Gain
+    label1: ''
+    label10: ''''''
+    label2: ''''''
+    label3: ''''''
+    label4: ''''''
+    label5: ''''''
+    label6: ''''''
+    label7: ''''''
+    label8: ''''''
+    label9: ''''''
+    legend: 'True'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    name: '"Spectrum"'
+    nconnections: '1'
+    norm_window: 'False'
+    showports: 'False'
+    tr_chan: '0'
+    tr_level: '0.0'
+    tr_mode: qtgui.TRIG_MODE_FREE
+    tr_tag: '""'
+    type: complex
+    units: dB
+    update_time: gui_update
+    width1: '1'
+    width10: '1'
+    width2: '1'
+    width3: '1'
+    width4: '1'
+    width5: '1'
+    width6: '1'
+    width7: '1'
+    width8: '1'
+    width9: '1'
+    wintype: window.WIN_BLACKMAN_hARRIS
+    ymax: '10'
+    ymin: '-140'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [680, 340.0]
+    rotation: 0
+    state: enabled
+- name: qtgui_waterfall_sink_x_0
+  id: qtgui_waterfall_sink_x
+  parameters:
+    affinity: ''
+    alias: ''
+    alpha1: '1.0'
+    alpha10: '1.0'
+    alpha2: '1.0'
+    alpha3: '1.0'
+    alpha4: '1.0'
+    alpha5: '1.0'
+    alpha6: '1.0'
+    alpha7: '1.0'
+    alpha8: '1.0'
+    alpha9: '1.0'
+    axislabels: 'True'
+    bw: samp_rate
+    color1: '0'
+    color10: '0'
+    color2: '0'
+    color3: '0'
+    color4: '0'
+    color5: '0'
+    color6: '0'
+    color7: '0'
+    color8: '0'
+    color9: '0'
+    comment: ''
+    fc: freq
+    fftsize: '8192'
+    freqhalf: 'True'
+    grid: 'False'
+    gui_hint: 4,1,1,1
+    int_max: '10'
+    int_min: '-140'
+    label1: ''
+    label10: ''
+    label2: ''
+    label3: ''
+    label4: ''
+    label5: ''
+    label6: ''
+    label7: ''
+    label8: ''
+    label9: ''
+    legend: 'True'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    name: '"Waterfall"'
+    nconnections: '1'
+    showports: 'False'
+    type: complex
+    update_time: gui_update
+    wintype: window.WIN_BLACKMAN_hARRIS
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [680, 444.0]
+    rotation: 0
+    state: enabled
+- name: soapy_sdrplay_source_0
+  id: soapy_sdrplay_source
+  parameters:
+    affinity: ''
+    agc: 'False'
+    alias: ''
+    antenna: antenna
+    bandwidth: '0.0'
+    center_freq: freq
+    comment: ''
+    dev_args: ''
+    freq_correction: '0'
+    gain: gain
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    samp_rate: samp_rate
+    type: fc32
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [384, 412.0]
+    rotation: 0
+    state: true
+
+connections:
+- [soapy_sdrplay_source_0, '0', qtgui_freq_sink_x_0, '0']
+- [soapy_sdrplay_source_0, '0', qtgui_waterfall_sink_x_0, '0']
+
+metadata:
+  file_format: 1
+  grc_version: 3.10.6.0
