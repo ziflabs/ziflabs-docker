@@ -13,11 +13,11 @@ Each directory has build scripts (either `clean_build.sh` or the incremental `bu
 
 Order | Image(s) | Description
 ----- | -------- | -----------
-1st | `sdrs` | [UHD](https://github.com/EttusResearch/uhd) and the [Signal Hound SDK](https://signalhound.com/software/signal-hound-software-development-kit-sdk/)
+1st | `sdrs` | [SDRplay](https://www.sdrplay.com/products/) drivers/API, [UHD](https://github.com/EttusResearch/uhd) and the [Signal Hound SDK](https://signalhound.com/software/signal-hound-software-development-kit-sdk/)
 2nd | `gnuradio310` | [VOLK](https://github.com/gnuradio/volk), [GNU Radio](https://github.com/gnuradio/gnuradio) 3.10, and several OOT modules
-3rd | `xxx` | project-specific images (in other repositories)
+3rd | ??? | project-specific images (in other repositories)
 
-The base image (`sdrs`) will also set up a non-root user with `sudo` access whose name is derived from the host user - this is all handled automatically through the build scripts. Be sure to run the `udev.sh` script to install `udev` rules on the host. This will allow non-root access of Signal Hound and Ettus SDR hardware inside the container.
+The base image (`sdrs`) will also set up a non-root user with `sudo` access whose name is derived from the host user - this is all handled automatically through the build scripts. Be sure to run the `udev.sh` script to install `udev` rules on the host. This will allow non-root USB access of SDR hardware inside the container.
 
 ## Running
 
