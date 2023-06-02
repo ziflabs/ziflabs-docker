@@ -48,15 +48,15 @@ RUN \
     # fix to make sure GNU Radio Companion launches correctly
     echo "export PYTHONPATH=/usr/local/lib/python3/dist-packages:/usr/local/lib/python3/site-packages:$PYTHONPATH" >> /home/$USER/.bashrc
 
-###############
-#  gr-shbb60  #
-############### 
+#############
+#  gr-bb60  #
+#############
 
 RUN \
     cd /home/$USER/foss && \
-    git clone https://github.com/herrameise/gr-shbb60 && \
-    mkdir /home/$USER/foss/gr-shbb60/build && \
-    cd /home/$USER/foss/gr-shbb60/build && \
+    git clone https://github.com/ziflabs/gr-bb60 && \
+    mkdir /home/$USER/foss/gr-bb60/build && \
+    cd /home/$USER/foss/gr-bb60/build && \
     cmake .. && make -j$(nproc) && sudo make install && sudo ldconfig
 
 ##############
@@ -78,39 +78,6 @@ RUN \
     cd /home/$USER/foss && \
     git clone https://github.com/sandialabs/gr-pdu_utils && \
     cd /home/$USER/foss/gr-pdu_utils && git checkout maint-3.10 && \
-    mkdir build && cd build && \
-    cmake .. && make -j$(nproc) && sudo make install && sudo ldconfig
-
-#####################
-#  gr-sandia_utils  #
-##################### 
-
-RUN \
-    cd /home/$USER/foss && \
-    git clone https://github.com/sandialabs/gr-sandia_utils && \
-    cd /home/$USER/foss/gr-sandia_utils && git checkout maint-3.10 && \
-    mkdir build && cd build && \
-    cmake .. && make -j$(nproc) && sudo make install && sudo ldconfig
-
-#####################
-#  gr-timing_utils  #
-##################### 
-
-RUN \
-    cd /home/$USER/foss && \
-    git clone https://github.com/sandialabs/gr-timing_utils && \
-    cd /home/$USER/foss/gr-timing_utils && git checkout maint-3.10 && \
-    mkdir build && cd build && \
-    cmake .. && make -j$(nproc) && sudo make install && sudo ldconfig
-
-###################
-#  gr-fhss_utils  #
-################### 
-
-RUN \
-    cd /home/$USER/foss && \
-    git clone https://github.com/sandialabs/gr-fhss_utils && \
-    cd /home/$USER/foss/gr-fhss_utils && git checkout maint-3.10 && \
     mkdir build && cd build && \
     cmake .. && make -j$(nproc) && sudo make install && sudo ldconfig
 

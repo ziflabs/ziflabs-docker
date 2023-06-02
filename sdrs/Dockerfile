@@ -80,9 +80,9 @@ RUN \
     sudo cp ftd2xx.h /usr/include/ && \
     sudo cp WinTypes.h /usr/include/ && \
     sudo ldconfig && \
-    sudo cp build/libftd2xx.* /usr/lib/ && \
-    sudo chmod 0755 /usr/lib/libftd2xx.so.1.4.27 && \
-    sudo ln -sf /usr/lib/libftd2xx.so.1.4.27 /usr/lib/libftd2xx.so
+    sudo cp build/libftd2xx.* /usr/local/lib/ && \
+    sudo chmod 0755 /usr/local/lib/libftd2xx.so.1.4.27 && \
+    sudo ln -sf /usr/local/lib/libftd2xx.so.1.4.27 /usr/local/lib/libftd2xx.so
 
 ######################
 #  SIGNAL HOUND SDK  #
@@ -101,7 +101,7 @@ RUN \
     cd /home/$USER/foss/signal_hound_sdk/device_apis/bb_series/lib/linux/Ubuntu\ 18.04/ && \
     sudo ldconfig -v -n . && \
     ln -sf libbb_api.so.5.0.5 libbb_api.so && \
-    sudo cp libbb_api.* /usr/lib/
+    sudo cp libbb_api.* /usr/local/lib/
 
 ##########
 #  DONE  #
