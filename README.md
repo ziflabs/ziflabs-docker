@@ -29,7 +29,7 @@ xhost +local:docker
 The [gnuradio310/](gnuradio310/) directory contains a `run.sh` script that shows how to start a container. By default, it maps the host's `~/Downloads` directory as a container volume. Once inside the container, open GNU Radio Companion:
 
 ```bash
-dev@2b310945025e:~$ gnuradio-companion
+dev@bf8e4cedc564:~$ gnuradio-companion
 ```
 
 And the GUI should come up:
