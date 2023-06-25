@@ -1,3 +1,5 @@
+#!/bin/bash
+
 HOST_DIRECTORY=/home/$USER/Downloads
 
 docker rm gnuradio310

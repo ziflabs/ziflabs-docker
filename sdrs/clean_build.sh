@@ -1,3 +1,5 @@
+#!/bin/bash
+
 docker rm sdrs
 docker rmi sdrs
 docker image prune -f

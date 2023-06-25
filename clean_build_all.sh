@@ -1,3 +1,5 @@
+#!/bin/bash
+
 cd sdrs
 ./clean_build.sh
 cd ..

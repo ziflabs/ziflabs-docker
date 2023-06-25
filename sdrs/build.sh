@@ -1,3 +1,5 @@
+#!/bin/bash
+
 docker build \
     -t sdrs \
     --build-arg USER=$USER \
