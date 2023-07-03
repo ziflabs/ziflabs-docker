@@ -90,7 +90,7 @@ RUN \
  
 RUN \
     cd /home/$USER/foss && \
-    wget https://signalhound.com/download/bbsa-application-programming-interface-for-windows-3264-bit/ -O signal_hound_sdk.zip && \
+    wget https://signalhound.com/sigdownloads/SDK/signal_hound_sdk_06_22_23.zip -O signal_hound_sdk.zip && \
     unzip signal_hound_sdk.zip
  
 RUN \
