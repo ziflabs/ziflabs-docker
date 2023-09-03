@@ -40,7 +40,7 @@ RUN \
 
 RUN \
     cd /home/$USER/foss && \
-    git clone https://github.com/gnuradio/gnuradio && cd gnuradio && git checkout v3.10.6.0 && \
+    git clone https://github.com/gnuradio/gnuradio && cd gnuradio && git checkout v3.10.7.0 && \
     mkdir /home/$USER/foss/gnuradio/build && \
     cd /home/$USER/foss/gnuradio/build && \
     cmake -DCMAKE_BUILD_TYPE=Release -DPYTHON_EXECUTABLE=/usr/bin/python3 .. && \
